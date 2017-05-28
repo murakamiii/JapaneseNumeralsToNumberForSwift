@@ -17,6 +17,7 @@
 		7BEAC02C1EDB0F2200E75A23 /* String+NumeralsToNumberTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BEAC02B1EDB0F2200E75A23 /* String+NumeralsToNumberTest.swift */; };
 		7BEAC02D1EDB126C00E75A23 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BEAC0001ED5D8D500E75A23 /* ViewController.swift */; };
 		7BEAC02E1EDB16AF00E75A23 /* String+NumeralsToNumber.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BEAC0241ED5DBE500E75A23 /* String+NumeralsToNumber.swift */; };
+		7BEAC0301EDB2A0D00E75A23 /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 7BEAC02F1EDB2A0D00E75A23 /* Settings.bundle */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -42,6 +43,7 @@
 		7BEAC0241ED5DBE500E75A23 /* String+NumeralsToNumber.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "String+NumeralsToNumber.swift"; sourceTree = "<group>"; };
 		7BEAC0291ED5DF8400E75A23 /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		7BEAC02B1EDB0F2200E75A23 /* String+NumeralsToNumberTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "String+NumeralsToNumberTest.swift"; sourceTree = "<group>"; };
+		7BEAC02F1EDB2A0D00E75A23 /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -90,6 +92,7 @@
 				7BEAC0051ED5D8D500E75A23 /* Assets.xcassets */,
 				7BEAC0071ED5D8D500E75A23 /* LaunchScreen.storyboard */,
 				7BEAC00A1ED5D8D500E75A23 /* Info.plist */,
+				7BEAC02F1EDB2A0D00E75A23 /* Settings.bundle */,
 			);
 			path = JapaneseNumeralsToNumberForSwift;
 			sourceTree = "<group>";
@@ -194,6 +197,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7BEAC0301EDB2A0D00E75A23 /* Settings.bundle in Resources */,
 				7BEAC0091ED5D8D500E75A23 /* LaunchScreen.storyboard in Resources */,
 				7BEAC0061ED5D8D500E75A23 /* Assets.xcassets in Resources */,
 				7BEAC0041ED5D8D500E75A23 /* Main.storyboard in Resources */,

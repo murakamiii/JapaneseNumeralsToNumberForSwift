@@ -4,7 +4,7 @@
 //
 //  Created by MURAKAMI on 2017/05/28.
 //
-//
+//  Copyright (c) 2017 Takuto Wada, https://github.com/twada/japanese-numerals-to-number
 
 import XCTest
 
