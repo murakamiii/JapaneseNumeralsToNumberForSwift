@@ -13,6 +13,9 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
+        let str : String = "五"
+        let convertedStr : String = str.numeralsToNumber()
+        print(convertedStr)
     }
 
     override func didReceiveMemoryWarning() {

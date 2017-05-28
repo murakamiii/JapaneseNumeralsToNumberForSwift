@@ -7,12 +7,16 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		7BEABFFF1ED5D8D500E75A23 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BEABFFE1ED5D8D500E75A23 /* AppDelegate.swift */; };
 		7BEAC0011ED5D8D500E75A23 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BEAC0001ED5D8D500E75A23 /* ViewController.swift */; };
 		7BEAC0041ED5D8D500E75A23 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7BEAC0021ED5D8D500E75A23 /* Main.storyboard */; };
 		7BEAC0061ED5D8D500E75A23 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7BEAC0051ED5D8D500E75A23 /* Assets.xcassets */; };
 		7BEAC0091ED5D8D500E75A23 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7BEAC0071ED5D8D500E75A23 /* LaunchScreen.storyboard */; };
 		7BEAC0141ED5D8D500E75A23 /* JapaneseNumeralsToNumberForSwiftTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BEAC0131ED5D8D500E75A23 /* JapaneseNumeralsToNumberForSwiftTests.swift */; };
+		7BEAC0251ED5DBE500E75A23 /* String+NumeralsToNumber.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BEAC0241ED5DBE500E75A23 /* String+NumeralsToNumber.swift */; };
+		7BEAC02A1ED5DF8400E75A23 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BEAC0291ED5DF8400E75A23 /* AppDelegate.swift */; };
+		7BEAC02C1EDB0F2200E75A23 /* String+NumeralsToNumberTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BEAC02B1EDB0F2200E75A23 /* String+NumeralsToNumberTest.swift */; };
+		7BEAC02D1EDB126C00E75A23 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BEAC0001ED5D8D500E75A23 /* ViewController.swift */; };
+		7BEAC02E1EDB16AF00E75A23 /* String+NumeralsToNumber.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BEAC0241ED5DBE500E75A23 /* String+NumeralsToNumber.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -27,7 +31,6 @@
 
 /* Begin PBXFileReference section */
 		7BEABFFB1ED5D8D500E75A23 /* JapaneseNumeralsToNumberForSwift.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = JapaneseNumeralsToNumberForSwift.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		7BEABFFE1ED5D8D500E75A23 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		7BEAC0001ED5D8D500E75A23 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		7BEAC0031ED5D8D500E75A23 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		7BEAC0051ED5D8D500E75A23 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -36,6 +39,9 @@
 		7BEAC00F1ED5D8D500E75A23 /* JapaneseNumeralsToNumberForSwiftTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = JapaneseNumeralsToNumberForSwiftTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		7BEAC0131ED5D8D500E75A23 /* JapaneseNumeralsToNumberForSwiftTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JapaneseNumeralsToNumberForSwiftTests.swift; sourceTree = "<group>"; };
 		7BEAC0151ED5D8D500E75A23 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		7BEAC0241ED5DBE500E75A23 /* String+NumeralsToNumber.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "String+NumeralsToNumber.swift"; sourceTree = "<group>"; };
+		7BEAC0291ED5DF8400E75A23 /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		7BEAC02B1EDB0F2200E75A23 /* String+NumeralsToNumberTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "String+NumeralsToNumberTest.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -77,7 +83,8 @@
 		7BEABFFD1ED5D8D500E75A23 /* JapaneseNumeralsToNumberForSwift */ = {
 			isa = PBXGroup;
 			children = (
-				7BEABFFE1ED5D8D500E75A23 /* AppDelegate.swift */,
+				7BEAC01F1ED5DB1200E75A23 /* Extension */,
+				7BEAC0291ED5DF8400E75A23 /* AppDelegate.swift */,
 				7BEAC0001ED5D8D500E75A23 /* ViewController.swift */,
 				7BEAC0021ED5D8D500E75A23 /* Main.storyboard */,
 				7BEAC0051ED5D8D500E75A23 /* Assets.xcassets */,
@@ -90,10 +97,19 @@
 		7BEAC0121ED5D8D500E75A23 /* JapaneseNumeralsToNumberForSwiftTests */ = {
 			isa = PBXGroup;
 			children = (
+				7BEAC02B1EDB0F2200E75A23 /* String+NumeralsToNumberTest.swift */,
 				7BEAC0131ED5D8D500E75A23 /* JapaneseNumeralsToNumberForSwiftTests.swift */,
 				7BEAC0151ED5D8D500E75A23 /* Info.plist */,
 			);
 			path = JapaneseNumeralsToNumberForSwiftTests;
+			sourceTree = "<group>";
+		};
+		7BEAC01F1ED5DB1200E75A23 /* Extension */ = {
+			isa = PBXGroup;
+			children = (
+				7BEAC0241ED5DBE500E75A23 /* String+NumeralsToNumber.swift */,
+			);
+			name = Extension;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -198,8 +214,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7BEAC02A1ED5DF8400E75A23 /* AppDelegate.swift in Sources */,
 				7BEAC0011ED5D8D500E75A23 /* ViewController.swift in Sources */,
-				7BEABFFF1ED5D8D500E75A23 /* AppDelegate.swift in Sources */,
+				7BEAC0251ED5DBE500E75A23 /* String+NumeralsToNumber.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -207,7 +224,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7BEAC02D1EDB126C00E75A23 /* ViewController.swift in Sources */,
+				7BEAC02E1EDB16AF00E75A23 /* String+NumeralsToNumber.swift in Sources */,
 				7BEAC0141ED5D8D500E75A23 /* JapaneseNumeralsToNumberForSwiftTests.swift in Sources */,
+				7BEAC02C1EDB0F2200E75A23 /* String+NumeralsToNumberTest.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
