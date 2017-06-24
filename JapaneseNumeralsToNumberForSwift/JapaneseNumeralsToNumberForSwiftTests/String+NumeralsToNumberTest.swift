@@ -32,6 +32,39 @@ class String_NumeralsToNumberTest: XCTestCase {
         
         testString = "六八"
         XCTAssertEqual(testString.numeralsToNumber(), "68")
+        
+        testString = "五十"
+        XCTAssertEqual(testString.numeralsToNumber(), "50")
+        
+        testString = "百"
+        XCTAssertEqual(testString.numeralsToNumber(), "100")
+        
+        testString = "百五十"
+        XCTAssertEqual(testString.numeralsToNumber(), "150")
+        
+        testString = "一九九七年六月六日"
+        XCTAssertEqual(testString.numeralsToNumber(), "1997年6月6日")
+        
+        testString = "千九百九十九"
+        XCTAssertEqual(testString.numeralsToNumber(), "1999")
+        
+        testString = ""
+        XCTAssertEqual(testString.numeralsToNumber(), "")
+        
+        testString = "テスト"
+        XCTAssertEqual(testString.numeralsToNumber(), "テスト")
+
+    }
+    
+    func testConvertCharToStrExp() {
+        
+    }
+    
+    func testExpStr() {
+        XCTAssertEqual("".expStr("1", isOnlyZero:false ),"10")
+        XCTAssertEqual("".expStr("1", isOnlyZero:true ),"0")
+        XCTAssertEqual("".expStr("2", isOnlyZero:false ),"100")
+        XCTAssertEqual("".expStr("2", isOnlyZero:true ),"00")
     }
     
     func testPerformanceExample() {
