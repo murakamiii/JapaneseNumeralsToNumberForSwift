@@ -9,6 +9,47 @@
 import Foundation
 
 extension String {
+    var japaneseNumericalChars : [String : String] {
+        return  [
+            "〇": "0",
+            "一": "1",
+            "二": "2",
+            "三": "3",
+            "四": "4",
+            "五": "5",
+            "六": "6",
+            "七": "7",
+            "八": "8",
+            "九": "9",
+        ]
+    }
+    
+    var japaneseChars : Set<String> {
+        return Set(japaneseNumericalChars.keys)
+    }
+    
+    private func convertCharToStr1To9(_ char : Character) -> String {
+        return japaneseNumericalChars[char.description]!
+    }
+    
+    var japaneseNumericalExpChars : [String : String] {
+        return  [
+            "十": "1",
+            "百": "2",
+            "千": "3",
+            "万": "4",
+            "億": "8",
+        ]
+    }
+    
+    var japaneseExpChars : Set<String> {
+        return Set(japaneseNumericalExpChars.keys)
+    }
+    
+    private func convertExpStrToNumStr(_ str : String) -> String {
+        return japaneseNumericalChars[str]!
+    }
+    
     func numeralsToNumber() -> String {
         enum Chartype {
             case numerical
@@ -27,31 +68,11 @@ extension String {
             }
         }
         
-        let japaneseNumericalChars : [String : String] = [
-            "〇": "0",
-            "一": "1",
-            "二": "2",
-            "三": "3",
-            "四": "4",
-            "五": "5",
-            "六": "6",
-            "七": "7",
-            "八": "8",
-            "九": "9",
-            ]
-        let japaneseChars : Set = Set(japaneseNumericalChars.keys)
-
-        let japaneseNumericalExpChars : [String : String] = [
-            "十": "1",
-            "百": "2",
-            "千": "3",
-            "万": "4",
-            "億": "8",
-            ]
-        let japaneseExpChars : Set = Set(japaneseNumericalExpChars.keys)
-        
         var splitedStr : [String] = []
         var currentCharType : Chartype = Chartype.normal
+        
+        // 文字列を漢数字文字列とそれ以外の文字列に分解する
+        // 10の乗数を含んでいるかどうかは変換時に判断する
         for (index,char) in self.characters.enumerated() {
             if index == 0 {
                 currentCharType = Chartype(self.checkType(char.description))
@@ -89,28 +110,6 @@ extension String {
     }
     
     func checkType(_ str : String) -> Int {
-        let japaneseNumericalChars : [String : String] = [
-            "〇": "0",
-            "一": "1",
-            "二": "2",
-            "三": "3",
-            "四": "4",
-            "五": "5",
-            "六": "6",
-            "七": "7",
-            "八": "8",
-            "九": "9",
-            ]
-        let japaneseChars : Set = Set(japaneseNumericalChars.keys)
-        
-        let japaneseNumericalExpChars : [String : String] = [
-            "十": "1",
-            "百": "2",
-            "千": "3",
-            "万": "4",
-            "億": "8",
-            ]
-        let japaneseExpChars : Set = Set(japaneseNumericalExpChars.keys)
         
         switch str {
         case str where japaneseChars.contains(str):
@@ -122,34 +121,8 @@ extension String {
         }
     }
     
-    private func convertCharToStr1To9(_ char : Character) -> String {
-        let japaneseNumericalChars : [String : String] = [
-            "〇": "0",
-            "一": "1",
-            "二": "2",
-            "三": "3",
-            "四": "4",
-            "五": "5",
-            "六": "6",
-            "七": "7",
-            "八": "8",
-            "九": "9",
-            ]
-        
-        return japaneseNumericalChars[char.description]!
-    }
-    
-    // 10の乗数混じりの漢数字を変換する
+    // 10の乗数混じりの漢数字文字列を変換する
     func convertNumerialStringToNumberWithString(_ string : String) -> String {
-        
-        let japaneseNumericalExpChars : [String : String] = [
-            "十": "1",
-            "百": "2",
-            "千": "3",
-            "万": "4",
-            "億": "8",
-            ]
-        let japaneseExpChars : Set = Set(japaneseNumericalExpChars.keys)
         
         let convStr : String = string.characters.reversed().reduce("", {
             if $0.0.isEmpty {
@@ -168,38 +141,6 @@ extension String {
         })
         
         return convStr
-    }
-    
-    func convertCharToStrExp(_ string : String, charStr : String) -> String {
-        let japaneseExpChars : [String : String] = [
-            "十": "1",
-            "百": "2",
-            "千": "3",
-            "万": "4",
-            "億": "8",
-            ]
-        
-        if string.isEmpty {
-            return expStr(japaneseExpChars[charStr]!, isOnlyZero: false)
-        }
-        
-        // stringは空チェック済みなので強制アンラップ
-        let lastStr : String! = string.characters.last?.description
-
-        if let _ : Int = Int (lastStr) {
-            if string.characters.count > 1 {
-                let beforeLastStr : String = string.substring(with:
-                    string.index(string.endIndex, offsetBy: -2)
-                    ..< string.index(before: string.endIndex))
-                if beforeLastStr == "0" {
-                    let expedStr : String = lastStr + expStr(japaneseExpChars[charStr]!, isOnlyZero: true)
-                    return string.substring(to: string.index(string.endIndex, offsetBy: -1 * (expedStr.characters.count + 1))) + expedStr
-                }
-            }
-            return string + expStr(japaneseExpChars[charStr]!, isOnlyZero: true)
-        } else {
-            return string + expStr(japaneseExpChars[charStr]!, isOnlyZero: false)
-        }
     }
     
     func expStr(_ numberStr : String, isOnlyZero : Bool) -> String {
