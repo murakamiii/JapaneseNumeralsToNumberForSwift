@@ -24,8 +24,8 @@ extension String {
         ]
     }
     
-    var japaneseChars : Set<String> {
-        return Set(japaneseNumericalChars.keys)
+    var japaneseChars : CharacterSet {
+        return CharacterSet(charactersIn: japaneseNumericalChars.keys.joined())
     }
     
     private func convertCharToStr1To9(_ char : Character) -> String {
@@ -42,31 +42,30 @@ extension String {
         ]
     }
     
-    var japaneseExpChars : Set<String> {
-        return Set(japaneseNumericalExpChars.keys)
+    var japaneseExpChars : CharacterSet {
+        return CharacterSet(charactersIn: japaneseNumericalExpChars.keys.joined())
     }
     
     private func convertExpStrToNumStr(_ str : String) -> String {
         return japaneseNumericalChars[str]!
     }
     
-    func numeralsToNumber() -> String {
-        enum Chartype {
-            case numerical
-            case exp
-            case normal
-            
-            init(_ number : Int) {
-                switch number {
-                case 0,1:
-                    self = .numerical
-//                case 1:
-//                    self = .exp
-                default:
-                    self = .normal
-                }
+    enum Chartype {
+        case numerical
+        case exp
+        case normal
+        
+        init(_ number : Int) {
+            switch number {
+            case 0,1:
+                self = .numerical
+            default:
+                self = .normal
             }
         }
+    }
+    
+    func numeralsToNumber() -> String {
         
         var splitedStr : [String] = []
         var currentCharType : Chartype = Chartype.normal
@@ -92,7 +91,7 @@ extension String {
         }
         
         let convertStr : String = splitedStr.reduce("", {
-            let StrSet : Set = Set($1.characters.map { $0.description })
+            let StrSet : CharacterSet = CharacterSet(charactersIn: $1)
             switch $1 {
             case $1 where !japaneseExpChars.intersection(StrSet).isEmpty:
                 return $0 + convertNumerialStringToNumberWithString($1)
@@ -112,9 +111,9 @@ extension String {
     func checkType(_ str : String) -> Int {
         
         switch str {
-        case str where japaneseChars.contains(str):
+        case str where str.rangeOfCharacter(from: japaneseChars) != nil:
             return 0
-        case str where japaneseExpChars.contains(str):
+        case str where str.rangeOfCharacter(from: japaneseExpChars) != nil:
             return 1
         default:
             return 2
@@ -126,14 +125,14 @@ extension String {
         
         let convStr : String = string.characters.reversed().reduce("", {
             if $0.0.isEmpty {
-                if japaneseExpChars.contains($0.1.description) {
+                if $0.1.description.rangeOfCharacter(from: japaneseExpChars) != nil {
                     return expStr(japaneseNumericalExpChars[$0.1.description]!, isOnlyZero: false)
                 } else {
                     return convertCharToStr1To9($0.1)
                 }
             }
             
-            if japaneseExpChars.contains($0.1.description) {
+            if $0.1.description.rangeOfCharacter(from: japaneseExpChars) != nil {
                 return String(Int($0.0)! + Int(expStr(japaneseNumericalExpChars[$0.1.description]!, isOnlyZero: false))!)
             } else {
                 return convertCharToStr1To9($0.1) + $0.0.substring(from: $0.0.index(after: $0.0.startIndex))
