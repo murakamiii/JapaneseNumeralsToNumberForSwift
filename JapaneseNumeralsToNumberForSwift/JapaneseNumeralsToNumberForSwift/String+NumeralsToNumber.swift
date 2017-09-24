@@ -65,6 +65,20 @@ extension String {
         }
     }
     
+    func checkType(_ str : String) -> Int {
+        
+        switch str {
+        case str where str.rangeOfCharacter(from: japaneseChars) != nil:
+            return 0
+        case str where str.rangeOfCharacter(from: japaneseExpChars) != nil:
+            return 1
+        default:
+            return 2
+        }
+    }
+}
+
+extension String {
     func numeralsToNumber() -> String {
         
         var splitedStr : [String] = []
@@ -108,34 +122,22 @@ extension String {
         return convertStr
     }
     
-    func checkType(_ str : String) -> Int {
-        
-        switch str {
-        case str where str.rangeOfCharacter(from: japaneseChars) != nil:
-            return 0
-        case str where str.rangeOfCharacter(from: japaneseExpChars) != nil:
-            return 1
-        default:
-            return 2
-        }
-    }
-    
     // 10の乗数混じりの漢数字文字列を変換する
     func convertNumerialStringToNumberWithString(_ string : String) -> String {
         
         let convStr : String = string.characters.reversed().reduce("", {
-            if $0.0.isEmpty {
-                if $0.1.description.rangeOfCharacter(from: japaneseExpChars) != nil {
-                    return expStr(japaneseNumericalExpChars[$0.1.description]!, isOnlyZero: false)
+            if $0.isEmpty {
+                if $1.description.rangeOfCharacter(from: japaneseExpChars) != nil {
+                    return expStr(japaneseNumericalExpChars[$1.description]!, isOnlyZero: false)
                 } else {
-                    return convertCharToStr1To9($0.1)
+                    return convertCharToStr1To9($1)
                 }
             }
             
-            if $0.1.description.rangeOfCharacter(from: japaneseExpChars) != nil {
-                return String(Int($0.0)! + Int(expStr(japaneseNumericalExpChars[$0.1.description]!, isOnlyZero: false))!)
+            if $1.description.rangeOfCharacter(from: japaneseExpChars) != nil {
+                return String(Int($0)! + Int(expStr(japaneseNumericalExpChars[$1.description]!, isOnlyZero: false))!)
             } else {
-                return convertCharToStr1To9($0.1) + $0.0.substring(from: $0.0.index(after: $0.0.startIndex))
+                return convertCharToStr1To9($1) + $0.substring(from: $0.index(after: $0.startIndex))
             }
         })
         
