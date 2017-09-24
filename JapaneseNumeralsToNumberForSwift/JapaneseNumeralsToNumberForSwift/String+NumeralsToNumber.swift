@@ -137,7 +137,7 @@ extension String {
             if $1.description.rangeOfCharacter(from: japaneseExpChars) != nil {
                 return String(Int($0)! + Int(expStr(japaneseNumericalExpChars[$1.description]!, isOnlyZero: false))!)
             } else {
-                return convertCharToStr1To9($1) + $0.substring(from: $0.index(after: $0.startIndex))
+                return convertCharToStr1To9($1) + $0.suffix($0.characters.count - 1)
             }
         })
         
@@ -148,7 +148,7 @@ extension String {
         var str : String = pow(Decimal(10), Int(numberStr)!).description
 
         if isOnlyZero {
-            str = str.substring(from: str.index(after: str.startIndex))
+            str = String(str.suffix(str.characters.count - 1))
         }
         return str
     }
