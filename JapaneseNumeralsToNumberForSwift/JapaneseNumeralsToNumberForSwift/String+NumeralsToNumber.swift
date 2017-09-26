@@ -82,9 +82,8 @@ extension String {
             }
             let newCharType: Chartype = checkType(char.description)
             
-            if newCharType == currentCharType {
+            if newCharType == currentCharType, let lastStr: String = splitedStr.popLast() {
                 // splitedStrの最後の値に１文字追加する
-                let lastStr: String! = splitedStr.popLast()
                 splitedStr.append(lastStr + char.description)
             } else {
                 currentCharType = newCharType
@@ -116,14 +115,16 @@ extension String {
         let convStr: String = string.characters.reversed().reduce("", {
             if $0.isEmpty {
                 if $1.description.rangeOfCharacter(from: japaneseExpChars) != nil {
-                    return expStr(japaneseNumericalExpChars[$1.description]!, isOnlyZero: false)
+                    return expStr(japaneseNumericalExpChars[$1.description, default: ""], isOnlyZero: false)
                 } else {
                     return convertCharToStr1To9($1)
                 }
             }
             
-            if $1.description.rangeOfCharacter(from: japaneseExpChars) != nil {
-                return String(Int($0)! + Int(expStr(japaneseNumericalExpChars[$1.description]!, isOnlyZero: false))!)
+            if $1.description.rangeOfCharacter(from: japaneseExpChars) != nil,
+                let currentInt = Int($0),
+                let expInt = Int(expStr(japaneseNumericalExpChars[$1.description, default: ""], isOnlyZero: false)) {
+                return String(currentInt + expInt)
             } else {
                 return convertCharToStr1To9($1) + $0.suffix($0.characters.count - 1)
             }
@@ -133,7 +134,8 @@ extension String {
     }
     
     func expStr(_ numberStr: String, isOnlyZero : Bool) -> String {
-        var str: String = pow(Decimal(10), Int(numberStr)!).description
+        guard let numberStrInt = Int(numberStr) else { return "" }
+        var str: String = pow(Decimal(10), numberStrInt).description
 
         if isOnlyZero {
             str = String(str.suffix(str.characters.count - 1))
