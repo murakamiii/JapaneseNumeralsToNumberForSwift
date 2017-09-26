@@ -9,7 +9,7 @@
 import Foundation
 
 extension String {
-    var japaneseNumericalChars : [String : String] {
+    var japaneseNumericalChars: [String: String] {
         return  [
             "〇": "0",
             "一": "1",
@@ -24,15 +24,15 @@ extension String {
         ]
     }
     
-    var japaneseChars : CharacterSet {
+    var japaneseChars: CharacterSet {
         return CharacterSet(charactersIn: japaneseNumericalChars.keys.joined())
     }
     
-    private func convertCharToStr1To9(_ char : Character) -> String {
-        return japaneseNumericalChars[char.description]!
+    private func convertCharToStr1To9(_ char: Character) -> String {
+        return japaneseNumericalChars[char.description, default: "0"]
     }
     
-    var japaneseNumericalExpChars : [String : String] {
+    var japaneseNumericalExpChars: [String : String] {
         return  [
             "十": "1",
             "百": "2",
@@ -42,38 +42,26 @@ extension String {
         ]
     }
     
-    var japaneseExpChars : CharacterSet {
+    var japaneseExpChars: CharacterSet {
         return CharacterSet(charactersIn: japaneseNumericalExpChars.keys.joined())
     }
     
-    private func convertExpStrToNumStr(_ str : String) -> String {
-        return japaneseNumericalChars[str]!
+    private func convertExpStrToNumStr(_ str: String) -> String {
+        return japaneseNumericalChars[str, default: "1"]
     }
     
     enum Chartype {
-        case numerical
-        case exp
-        case normal
-        
-        init(_ number : Int) {
-            switch number {
-            case 0,1:
-                self = .numerical
-            default:
-                self = .normal
-            }
-        }
+        case numerical, exp, normal
     }
     
-    func checkType(_ str : String) -> Int {
-        
+    func checkType(_ str: String) -> Chartype {
         switch str {
         case str where str.rangeOfCharacter(from: japaneseChars) != nil:
-            return 0
+            return Chartype.numerical
         case str where str.rangeOfCharacter(from: japaneseExpChars) != nil:
-            return 1
+            return Chartype.numerical
         default:
-            return 2
+            return Chartype.normal
         }
     }
 }
@@ -81,22 +69,22 @@ extension String {
 extension String {
     func numeralsToNumber() -> String {
         
-        var splitedStr : [String] = []
-        var currentCharType : Chartype = Chartype.normal
+        var splitedStr: [String] = []
         
         // 文字列を漢数字文字列とそれ以外の文字列に分解する
         // 10の乗数を含んでいるかどうかは変換時に判断する
+        var currentCharType: Chartype = Chartype.normal
         for (index,char) in self.characters.enumerated() {
             if index == 0 {
-                currentCharType = Chartype(self.checkType(char.description))
+                currentCharType = checkType(char.description)
                 splitedStr.append(char.description)
                 continue
             }
-            let newCharType : Chartype = Chartype(self.checkType(char.description))
+            let newCharType: Chartype = checkType(char.description)
             
             if newCharType == currentCharType {
                 // splitedStrの最後の値に１文字追加する
-                let lastStr : String! = splitedStr.popLast()
+                let lastStr: String! = splitedStr.popLast()
                 splitedStr.append(lastStr + char.description)
             } else {
                 currentCharType = newCharType
@@ -104,8 +92,8 @@ extension String {
             }
         }
         
-        let convertStr : String = splitedStr.reduce("", {
-            let StrSet : CharacterSet = CharacterSet(charactersIn: $1)
+        let convertStr: String = splitedStr.reduce("", {
+            let StrSet: CharacterSet = CharacterSet(charactersIn: $1)
             switch $1 {
             case $1 where !japaneseExpChars.intersection(StrSet).isEmpty:
                 return $0 + convertNumerialStringToNumberWithString($1)
@@ -123,9 +111,9 @@ extension String {
     }
     
     // 10の乗数混じりの漢数字文字列を変換する
-    func convertNumerialStringToNumberWithString(_ string : String) -> String {
+    func convertNumerialStringToNumberWithString(_ string: String) -> String {
         
-        let convStr : String = string.characters.reversed().reduce("", {
+        let convStr: String = string.characters.reversed().reduce("", {
             if $0.isEmpty {
                 if $1.description.rangeOfCharacter(from: japaneseExpChars) != nil {
                     return expStr(japaneseNumericalExpChars[$1.description]!, isOnlyZero: false)
@@ -144,8 +132,8 @@ extension String {
         return convStr
     }
     
-    func expStr(_ numberStr : String, isOnlyZero : Bool) -> String {
-        var str : String = pow(Decimal(10), Int(numberStr)!).description
+    func expStr(_ numberStr: String, isOnlyZero : Bool) -> String {
+        var str: String = pow(Decimal(10), Int(numberStr)!).description
 
         if isOnlyZero {
             str = String(str.suffix(str.characters.count - 1))
