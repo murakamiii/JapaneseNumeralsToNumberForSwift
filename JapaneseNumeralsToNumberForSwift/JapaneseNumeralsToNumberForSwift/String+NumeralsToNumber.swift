@@ -74,7 +74,7 @@ extension String {
         // 文字列を漢数字文字列とそれ以外の文字列に分解する
         // 10の乗数を含んでいるかどうかは変換時に判断する
         var currentCharType: Chartype = Chartype.normal
-        for (index,char) in self.characters.enumerated() {
+        for (index,char) in self.enumerated() {
             if index == 0 {
                 currentCharType = checkType(char.description)
                 splitedStr.append(char.description)
@@ -97,7 +97,7 @@ extension String {
             case $1 where !japaneseExpChars.intersection(StrSet).isEmpty:
                 return $0 + convertNumerialStringToNumberWithString($1)
             case $1 where !japaneseChars.intersection(StrSet).isEmpty:
-                let convStr : String = $1.characters.reduce("", {
+                let convStr : String = $1.reduce("", {
                    return $0 + convertCharToStr1To9($1)
                 })
                 return $0 + convStr
@@ -112,7 +112,7 @@ extension String {
     // 10の乗数混じりの漢数字文字列を変換する
     func convertNumerialStringToNumberWithString(_ string: String) -> String {
         
-        let convStr: String = string.characters.reversed().reduce("", {
+        let convStr: String = string.reversed().reduce("", {
             if $0.isEmpty {
                 if $1.description.rangeOfCharacter(from: japaneseExpChars) != nil {
                     return expStr(japaneseNumericalExpChars[$1.description, default: ""], isOnlyZero: false)
@@ -126,7 +126,7 @@ extension String {
                 let expInt = Int(expStr(japaneseNumericalExpChars[$1.description, default: ""], isOnlyZero: false)) {
                 return String(currentInt + expInt)
             } else {
-                return convertCharToStr1To9($1) + $0.suffix($0.characters.count - 1)
+                return convertCharToStr1To9($1) + $0.suffix($0.count - 1)
             }
         })
         
@@ -138,7 +138,7 @@ extension String {
         var str: String = pow(Decimal(10), numberStrInt).description
 
         if isOnlyZero {
-            str = String(str.suffix(str.characters.count - 1))
+            str = String(str.suffix(str.count - 1))
         }
         return str
     }
